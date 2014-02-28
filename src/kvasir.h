@@ -3,9 +3,9 @@
 
 #include <limits.h>
 
-#define VERBOSE 1
+#define VERBOSE 0
 #define MAX_RAILS 2
-#define RAIL_SIZE 8
+#define RAIL_SIZE 16
 
 
 int task_rails(char* rails[], int num_rails);

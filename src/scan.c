@@ -3,7 +3,7 @@
 
 int scan(char* host, const char* payload)
 {
-	//printf("%s\n",host);
+	printf("%s\n",host);
 	int sockfd,res,valopt;
   	long arg;
  	fd_set sock_set;

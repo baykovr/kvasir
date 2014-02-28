@@ -2,54 +2,49 @@
 #include "scan.h"
 
 
-int proc_multi_rails(char** rails[])
-{
-	unsigned int num_children = MAX_RAILS;
+// int proc_multi_rails(char** rails[])
+// {
+// 	unsigned int num_children = MAX_RAILS;
 
-	pid_t pids[num_children];
+// 	pid_t pids[num_children];
 	
-	unsigned int i;
-	for(i=0;i<num_children;i++)
-	{
-		if ((pids[i] = fork()) < 0)
-		{
-    		perror("fork");
-    		abort();
-  		}
-  		else if (pids[i] == 0)
-  		{
-  			/*Process a single rail from rails*/
-  			unsigned int r_item_c;
-			for(r_item_c=0;r_item_c<RAIL_SIZE;r_item_c++)
-	    	{printf(" [+] %s\n",rails[i][r_item_c]);}
-	  		printf("-*-\n");
+// 	unsigned int i;
+// 	for(i=0;i<num_children;i++)
+// 	{
+// 		if ((pids[i] = fork()) < 0)
+// 		{
+//     		perror("fork");
+//     		abort();
+//   		}
+//   		else if (pids[i] == 0)
+//   		{
+//   			/*Process a single rail from rails*/
+//   			unsigned int r_item_c;
+// 			for(r_item_c=0;r_item_c<RAIL_SIZE;r_item_c++)
+// 	    	{printf(" [+] %s\n",rails[i][r_item_c]);}
+// 	  		printf("-*-\n");
 
-    		proc_rail(rails[i]);
-    		exit(0);
-  		}
-	}
-	/*wait for the children*/
-	int status;
-	pid_t pid;
-	while(num_children>0)
-	{
-		pid = wait(&status);
-		if(DEBUG)
-		{
-			printf("child %ld finished: %d\n",(long)pid,status);
-		}	
-		num_children--;
-	}
-	return 0;
-}
+//     		proc_rail(rails[i]);
+//     		exit(0);
+//   		}
+// 	}
+// 	/*wait for the children*/
+// 	int status;
+// 	pid_t pid;
+// 	while(num_children>0)
+// 	{
+// 		pid = wait(&status);
+// 		if(DEBUG)
+// 		{
+// 			printf("child %ld finished: %d\n",(long)pid,status);
+// 		}	
+// 		num_children--;
+// 	}
+// 	return 0;
+// }
 
 int proc_rail(char* rail[])
 {
-	// unsigned int r_item_c;
-	// for(r_item_c=0;r_item_c<RAIL_SIZE;r_item_c++)
-	//     		{printf(" [+] %s\n",rail[r_item_c]);}
-	//   printf("-*-\n");
-
 	unsigned int num_children = RAIL_SIZE;
 
 	pid_t pids[num_children];
@@ -60,7 +55,7 @@ int proc_rail(char* rail[])
 		if( rail[i] == NULL)
 		{
 			/*no more tasks in this rail*/
-			printf("[EXIT] %s\n",rail[i]);
+			if(VERBOSE){printf("[EXIT] %s\n",rail[i]);}
 			break;
 		}
 		else
@@ -72,7 +67,6 @@ int proc_rail(char* rail[])
   			else if (pids[i] == 0)
   			{
   				/*Process one item per child*/
-  				printf("[fire>] %s\n",rail[i]);
   				scan(rail[i], ACTIVE_MSG);
   				free(rail[i]);
   				exit(0);
@@ -86,7 +80,7 @@ int proc_rail(char* rail[])
 	while(num_children>0)
 	{
 		pid = wait(&status);
-		if(DEBUG)
+		if(VERBOSE)
 		{
 			printf("child %ld finished: %d\n",(long)pid,status);
 		}	
@@ -119,19 +113,16 @@ int proc_scheduler(char* host_file_path)
     	{
     		char *line = malloc(16);
 			ssize_t line_len = getline(&line,&len,hosts);
-			printf("LNE %d\n",line_len);
-			
-			/*trip the newline character*/
+			/*strip the newline character*/
     		line[strlen(line) - 1] = '\0';
 
     		/*check for eof*/
-    		
     		if(line_len < 8 )
     		{
       		if(VERBOSE)
       		  {printf("[READER] Reached EOF or line len < 8\n");}
       			/*add end rail delim*/
-      			rail[r_item_c] = "END";
+      			rail[r_item_c] = NULL;
       			eof = 1;
       			break;
     		}
