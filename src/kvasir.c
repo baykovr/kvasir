@@ -134,7 +134,6 @@ int proc_scheduler(char* host_file_path)
 	    proc_rail(rail);
 	    if(eof)
 	    	{break;}
-	    printf("wait\n");
     }
     return 0;
 	//int fd = read("/proc/sys/kernel/pid_max");

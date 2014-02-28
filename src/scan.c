@@ -121,7 +121,7 @@ int scan(char* host, const char* payload)
      else 
      { 
 		if(DEBUG)
-		  {fprintf(stderr, "[scan] con %s\n", errno, strerror(errno)); }
+		  {fprintf(stderr, "[scan] con %s\n", strerror(errno)); }
         if(sockfd>0)
           {close(sockfd);}
 		return -1;
