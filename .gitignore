@@ -1,13 +1,23 @@
-# Compiled Object files
-*.slo
-*.lo
+# Object files
 *.o
+*.ko
+*.obj
+*.elf
 
-# Compiled Dynamic libraries
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
 *.so
+*.so.*
 *.dylib
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
