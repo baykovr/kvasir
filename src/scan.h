@@ -11,7 +11,9 @@
 #include <errno.h>
 #include <unistd.h>
 
-#define DEBUG   1
-#define TIMEOUT 3 /*seconds*/
+#define DEBUG   0
+#define TIMEOUT 2 /*seconds*/
 
 #define MAX_RESPONSE_SIZE 4096
+
+int scan(char* host, const char* payload);
