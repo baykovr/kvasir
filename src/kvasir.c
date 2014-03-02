@@ -1,10 +1,6 @@
 #include "kvasir.h"
 #include "scan.h"
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f27ec7092c8ba2b255691326f8c5887cc19d7f9
 int proc_rail(char* rail[])
 {
 	unsigned int num_children = RAIL_SIZE;
