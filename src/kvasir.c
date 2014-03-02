@@ -2,47 +2,6 @@
 #include "scan.h"
 
 
-// int proc_multi_rails(char** rails[])
-// {
-// 	unsigned int num_children = MAX_RAILS;
-
-// 	pid_t pids[num_children];
-	
-// 	unsigned int i;
-// 	for(i=0;i<num_children;i++)
-// 	{
-// 		if ((pids[i] = fork()) < 0)
-// 		{
-//     		perror("fork");
-//     		abort();
-//   		}
-//   		else if (pids[i] == 0)
-//   		{
-//   			/*Process a single rail from rails*/
-//   			unsigned int r_item_c;
-// 			for(r_item_c=0;r_item_c<RAIL_SIZE;r_item_c++)
-// 	    	{printf(" [+] %s\n",rails[i][r_item_c]);}
-// 	  		printf("-*-\n");
-
-//     		proc_rail(rails[i]);
-//     		exit(0);
-//   		}
-// 	}
-// 	/*wait for the children*/
-// 	int status;
-// 	pid_t pid;
-// 	while(num_children>0)
-// 	{
-// 		pid = wait(&status);
-// 		if(DEBUG)
-// 		{
-// 			printf("child %ld finished: %d\n",(long)pid,status);
-// 		}	
-// 		num_children--;
-// 	}
-// 	return 0;
-// }
-
 int proc_rail(char* rail[])
 {
 	unsigned int num_children = RAIL_SIZE;
