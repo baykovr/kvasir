@@ -5,18 +5,18 @@ int scan(char* host, const char* payload)
 {
 	printf("%s\n",host);
 	int sockfd,res,valopt;
-  	long arg;
+  long arg;
  	fd_set sock_set;
-  	socklen_t lon;
-  	struct sockaddr_in addr;
+  socklen_t lon;
+  struct sockaddr_in addr;
 	struct addrinfo hints, *servinfo;
 	struct timeval timeout;
   	
 	/*fill timeout*/
-  	timeout.tv_sec  = TIMEOUT;
-  	timeout.tv_usec = 0;
+  timeout.tv_sec  = TIMEOUT;
+  timeout.tv_usec = 0;
 
-  	/*fill target sockaddr_in*/
+  /*fill target sockaddr_in*/
 	memset(&hints, 0, sizeof(hints));
 
 	hints.ai_family   = AF_INET;
