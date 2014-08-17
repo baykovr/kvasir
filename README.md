@@ -5,6 +5,9 @@ Simple HTTP scanner using no external libraries.
 
 Use ulimit to increase the number of max open file descriptors if using many sockets.
 
+Note: There is sparse documentation since this is a toy project, if you would like an example of
+socket programming see scan.c
+
 Usage
 =====
 
