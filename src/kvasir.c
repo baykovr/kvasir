@@ -48,42 +48,40 @@ int proc_rail(char* rail[])
 
 int proc_scheduler(char* host_file_path)
 {
-	if(VERBOSE)
-		{printf("Reading %s\n",host_file_path);}
-	
-	FILE* hosts;
-  	char* read_line = NULL;
-  	int eof         = 0;
-  	size_t  len     = 16;
-  	hosts = fopen(host_file_path,"r");
-  	if(hosts==NULL) 
+    if(VERBOSE)
+	{printf("Reading %s\n",host_file_path);}
+    FILE* hosts;
+    char* read_line = NULL;
+    int eof         = 0;
+    size_t  len     = 16;
+    hosts = fopen(host_file_path,"r");
+    if(hosts==NULL) 
     	{perror("Cannot open file\n");exit(-1);}
 
     while(!eof)
     {
-		/*construct rail*/
+	/*construct rail*/
     	char* rail[RAIL_SIZE];
     	unsigned int r_item_c;
-    	for(r_item_c=0;r_item_c<RAIL_SIZE;r_item_c++)
-    	{
+    	for(r_item_c=0;r_item_c<RAIL_SIZE;r_item_c++){
     		char *line = malloc(16);
-			ssize_t line_len = getline(&line,&len,hosts);
-			/*strip the newline character*/
+		ssize_t line_len = getline(&line,&len,hosts);
+		/*strip the newline character*/
     		line[strlen(line) - 1] = '\0';
-
+    		
     		/*check for eof*/
-    		if(line_len < 8 )
-    		{
+    		if(line_len < 8 ){
+    		
       		if(VERBOSE)
       		  {printf("[READER] Reached EOF or line len < 8\n");}
-      			/*add end rail delim*/
-      			rail[r_item_c] = NULL;
-      			eof = 1;
-      			break;
+      		
+      		/*add end rail delim*/
+      		rail[r_item_c] = NULL;
+      		eof = 1;
+      		break;
     		}
-    		else
-    		{
-    			rail[r_item_c] = line;
+    		else{
+    		rail[r_item_c] = line;
     		}
     	}
 	    proc_rail(rail);
