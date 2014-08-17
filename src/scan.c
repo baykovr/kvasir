@@ -3,16 +3,16 @@
 
 int scan(char* host, const char* payload)
 {
-	printf("%s\n",host);
-	int sockfd,res,valopt;
+  printf("%s\n",host);
+  int sockfd,res,valopt;
   long arg;
- 	fd_set sock_set;
+  fd_set sock_set;
   socklen_t lon;
   struct sockaddr_in addr;
-	struct addrinfo hints, *servinfo;
-	struct timeval timeout;
+  struct addrinfo hints, *servinfo;
+  struct timeval timeout;
   	
-	/*fill timeout*/
+  /*fill timeout*/
   timeout.tv_sec  = TIMEOUT;
   timeout.tv_usec = 0;
 
