@@ -20,6 +20,15 @@ in kvasir.h modify
 There are 16 rails of variable sized, defined by RAIL_SIZE. In this example 16*16 256 active threads will
 be created. Typically 4096 file descriptors are allowed by default on my linux systems, you can increase this number using the ulimit command.
 
+    cat /proc/sys/fs/file-max
+    # ulimit -Hn
+    # ulimit -Sn
+
+    vi /etc/security/limits.conf
+    username soft nofile 4096
+    username hard nofile 10240
+
+
 in scan.h modify
 
     #define DEBUG 0
