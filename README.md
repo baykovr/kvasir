@@ -1,7 +1,7 @@
 kvasir
 ======
 
-Simple HTTP scanner using no external libraries.
+A fork/exec threaded HTTP scanner using no external libraries.
 
 Use ulimit to increase the number of max open file descriptors if using many sockets.
 
